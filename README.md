@@ -56,7 +56,7 @@ Browse through the source code. Most of the time, you'll want to run `generator/
 
 Have fun!
 
-## Additional: `generator` design decisions
+## Appendix: `generator` design decisions
 
 CPLEX is a lightning-fast ILP solver. It's used in this project because the authors of the paper (see [Credits](#credits)) used it. 
 
