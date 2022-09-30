@@ -7,6 +7,7 @@ function plot_from_color_and_label(r_color,r_label,filename)
     clf ( );
     hold ( 'on' );
 
+%  Make the figure nicely centered
     set(gcf, 'PaperUnits', 'centimeters');
     set(gcf, 'PaperPosition', [0 0 10 10]);
 %
