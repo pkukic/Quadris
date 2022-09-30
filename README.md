@@ -25,6 +25,30 @@ The project is divided into 3 parts:
 
 I consider this project mostly finished. On my machine (Ryzen 7 4700u, 24 GB RAM) `populate_solutions_dir` can find a new, **unique** solution of the board about every 1 - 3 seconds (I only ran it for 40k solutions, so 3 seconds per solve was the worst I got). Also, `gui.py` can find a solution to a partially solved board in less than 5 seconds. 
 
-## TODO:  Requirements
 
-### TODO: Document CPLEX/SQLITE
+## Requirements
+
+First of all, make sure you have MATLAB R2022b or higher installed. 
+Instructions on how to install `matlabengine`, the MATLAB API for Python, can be found here:
+
+https://www.mathworks.com/help/matlab/matlab_external/install-the-matlab-engine-for-python.html
+
+You'll also need CPLEX, and the CPLEX API for Python (CPLEX is the ILP solver):
+
+https://www.ibm.com/docs/en/icos/20.1.0?topic=cplex-setting-up-python-api
+
+
+Also, as of September 2022, Python 3.9.x is the newest Python version supported by CPLEX so don't use anything newer than that.
+ 
+
+Finally, you can install all required Python packages by using:
+
+```bash
+pip install -r requirements.txt
+```
+
+## Usage
+
+Browse through the source code. Most of the time, you'll want to run `generator/populate_solutions_dir.py` or `solver/gui.py`.
+
+Have fun!
