@@ -12,7 +12,7 @@ And the corresponding open-source repository:
 
 https://zenodo.org/record/6366101#.YzWwhdKxWus
 
-All important parts of the code related to generating and displaying multiple solutions to the polyomino tiling problem (and thus to the Quadris puzzle game) are from this repository. I just adapted and extended these codes so that I can solve Quadris.
+**All important parts of the code related to generating and displaying multiple solutions to the polyomino tiling problem (and thus to the Quadris puzzle game) are from this repository. I just adapted and extended these codes so that I can solve Quadris.**
 
 ## Project structure
 The project is divided into 3 parts:
