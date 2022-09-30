@@ -23,7 +23,7 @@ The project is divided into 3 parts:
 
 ## State of the project
 
-I consider this project mostly finished. On the machine this`generator` was run on (Core i7-5600U, 16 GB RAM) `populate_solutions_dir` can find a new, **unique** solution of the board about every 1 - 3 seconds (I only ran it for 40k solutions, so 3 seconds per solve was the worst I got). Also, `gui.py` can find a solution to a partially solved board in less than 5 seconds (tested on a different machine - Ryzen 7 4700u, 24 GB RAM).
+I consider this project mostly finished. On the machine `generator` was run on (Core i7-5600U, 16 GB RAM) `populate_solutions_dir` can find a new, **unique** solution of the board about every 1 - 3 seconds (I only ran it for 40k solutions, so 3 seconds per solve was the worst I got). Also, `gui.py` can find a solution to a partially solved board in less than 5 seconds (tested on a different machine - Ryzen 7 4700u, 24 GB RAM).
 
 I haven't found **all** solutions to the puzzle because I don't want to wait too long and only have one machine with MATLAB installed, but I consider this to be a really nice proof-of-concept project.
 
@@ -55,3 +55,14 @@ pip install -r requirements.txt
 Browse through the source code. Most of the time, you'll want to run `generator/populate_solutions_dir.py` or `solver/gui.py`.
 
 Have fun!
+
+## Additional: `generator` design decisions
+
+CPLEX is a lightning-fast ILP solver. It's used in this project because the authors of the paper (see [Credits](#credits)) used it. 
+
+CPLEX is usually multithreaded, which is great, but the thing that's not so great is that the multithreaded mode works only when you want to output all the solutions CPLEX found in a single **.sol** file. The **.sol** solution files get really big (several GBs) when you increase the number of solutions you ask of CPLEX to find.
+
+The natural way to deal with this problem is to split the process into batches, that is, to first find some number of solutions (let's say 1000), save them to a reasonably-sized *.sol file, and rinse and repeat. The problem with this is that since CPLEX treats this as an [MIP problem](https://www.ibm.com/docs/en/icos/20.1.0?topic=mip-stating-problem), it can't save the final state of execution and start from there the next time. That is, if you were to try to find all of the solutions by batching into sets of 1000 solutions, [CPLEX would just keep finding the same 1000 solutions](https://www.ibm.com/support/pages/stop-cplex-optimization-run-and-resume-it-later-time).
+
+So the only reasonable thing that I could think of was to give up on multithreading, and use [IncumbentCallback](https://www.ibm.com/docs/en/icos/12.8.0.0?topic=SSSA5P_12.8.0/ilog.odms.cplex.help/refpythoncplex/html/cplex.callbacks.IncumbentCallback-class.html) to check if the solution is unique and save it, if it is.
+
