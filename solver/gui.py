@@ -49,6 +49,7 @@ for k in index_color_quantity.keys():
 
 print(cmap_list)
 
+# Label #i will correspond to the correct color
 cmap = colors.ListedColormap(cmap_list)
 
 color_to_label = {
@@ -145,29 +146,40 @@ if __name__ == '__main__':
         button.on_clicked(set_val_on_click)
 
     def onclick(event):
+        
         global LABEL, N, color_to_label
         print('clicked')
+
+        # Check if *this* button was clicked
         if event.inaxes == ax:
+            
             if N == 0:
                 print(color_to_label)
                 new_label = get_label_and_update(search_solutions.get_color_from_label(LABEL))
+            
                 if new_label != LABEL:
                     LABEL = new_label
+            
                 else:
                     raise ValueError("All polyminoes of this kind already used up!")
+            
                 print(f"LABEL set to {LABEL}")
 
             N -= 1
             fx = int(np.floor(event.xdata))
             fy = int(np.floor(event.ydata))
             print(N, fy, fx)
+
+            # Update the image
             image[fy, fx] = LABEL
 
+            # Unravel it so you can draw the canvas
             cax.set_array(image.ravel())
             fig.canvas.draw()
     
     fig.canvas.mpl_connect('button_press_event', onclick)
     
+    # Find the solution of the board on Ctrl + S
     def press(event):
         global image
         sys.stdout.flush()
@@ -177,6 +189,7 @@ if __name__ == '__main__':
             cax.set_array(image.ravel())
             fig.canvas.draw()
     
+    # Remove the default Ctrl + S and replace it with our custom functionality
     plt.rcParams['keymap.save'].remove('ctrl+s')
     fig.canvas.mpl_connect('key_press_event', press)
     plt.show()

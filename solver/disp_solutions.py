@@ -20,6 +20,9 @@ def dicts_from_image(image):
     return [search_solutions.label_to_dict(l) for l in rotations_and_reflections(image)]
 
 def check_subsetability(d_parent, d_child):
+    # Check if the 'child' set of polymino positions is a 
+    # subset of the 'parent' set of polymino positions, for
+    # all polymino shapes - S, I, L, T, Z, M
     v = [d_child[k].issubset(d_parent[k]) for k in range(1, 6+1)]
     v = np.array(v)
     return np.all(v == 1)

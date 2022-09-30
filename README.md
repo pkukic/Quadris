@@ -23,8 +23,9 @@ The project is divided into 3 parts:
 
 ## State of the project
 
-I consider this project mostly finished. On my machine (Ryzen 7 4700u, 24 GB RAM) `populate_solutions_dir` can find a new, **unique** solution of the board about every 1 - 3 seconds (I only ran it for 40k solutions, so 3 seconds per solve was the worst I got). Also, `gui.py` can find a solution to a partially solved board in less than 5 seconds. 
+I consider this project mostly finished. On the machine this`generator` was run on (Core i7-5600U, 16 GB RAM) `populate_solutions_dir` can find a new, **unique** solution of the board about every 1 - 3 seconds (I only ran it for 40k solutions, so 3 seconds per solve was the worst I got). Also, `gui.py` can find a solution to a partially solved board in less than 5 seconds (tested on a different machine - Ryzen 7 4700u, 24 GB RAM).
 
+I haven't found **all** solutions to the puzzle because I don't want to wait too long and only have one machine with MATLAB installed, but I consider this to be a really nice proof-of-concept project.
 
 ## Requirements
 
@@ -34,6 +35,8 @@ Instructions on how to install `matlabengine`, the MATLAB API for Python, can be
 https://www.mathworks.com/help/matlab/matlab_external/install-the-matlab-engine-for-python.html
 
 You'll also need CPLEX, and the CPLEX API for Python (CPLEX is the ILP solver):
+
+https://www.ibm.com/academic/topic/data-science?ach_id=6fe17098-43df-4a9d-8412-3377286841a3
 
 https://www.ibm.com/docs/en/icos/20.1.0?topic=cplex-setting-up-python-api
 

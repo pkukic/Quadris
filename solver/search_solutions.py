@@ -4,6 +4,8 @@ import pickle
 import os
 
 label_to_color = {
+    # All elements have to be tuples,
+    # So force tuples here: type((0,)) == <type 'tuple'> and type((0)) = <type 'int'>
     (0,): 0,
     (1,): 1,
     (2, 3): 2,
@@ -48,13 +50,22 @@ def label_to_dict(label):
         5: set(),
         6: set(),
     }
+    
     for i in range(1, 21+1):
+        
         indices = np.argwhere(label == i)
+        
         if indices.size != 0:
+
+            # This has to be sorted because otherwise you couldn't compare 
+            # partial solutions with full solutions properly
             indices = tuple(tuple(item) for item in indices)
             indices = tuple(sorted(indices, key=lambda x: x[0]+x[1]))
             color = get_color_from_label(i)
+
+            # Add the sorted tuple to the set
             d[color].add(indices)
+    
     return d
 
 def labels_to_dicts(labels):
