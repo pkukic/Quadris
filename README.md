@@ -25,7 +25,7 @@ The project is divided into 3 parts:
 
 I consider this project mostly finished. On the machine `generator` was run on (Core i7-5600U, 16 GB RAM) `populate_solutions_dir` can find a new, **unique** solution of the board about every 1 - 3 seconds (I only ran it for 40k solutions, so 3 seconds per solve was the worst I got). Also, `gui.py` can find a solution to a partially solved board in less than 5 seconds (tested on a different machine - Ryzen 7 4700u, 24 GB RAM).
 
-I haven't found **all** solutions to the puzzle because I don't want to wait too long and only have one machine with MATLAB installed, but I consider this to be a really nice proof-of-concept project.
+I found around 40k solutions. The goal was to find at least 10k solutions, so that goal was successfully reached.
 
 ## Requirements
 
